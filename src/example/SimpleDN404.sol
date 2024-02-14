@@ -41,9 +41,13 @@ contract SimpleDN404 is DN404, Ownable {
         return _symbol;
     }
 
-    function tokenURI(uint256 tokenId) public view override returns (string memory result) {
+    function tokenURI(
+        uint256 tokenId
+    ) public view override returns (string memory result) {
         if (bytes(_baseURI).length != 0) {
-            result = string(abi.encodePacked(_baseURI, LibString.toString(tokenId)));
+            result = string(
+                abi.encodePacked(_baseURI, LibString.toString(tokenId))
+            );
         }
     }
 

@@ -74,7 +74,9 @@ contract NFTMintDN404 is DN404, Ownable {
         _initializeDN404(initialTokenSupply, initialSupplyOwner, mirror);
     }
 
-    function mint(uint256 amount) public payable isValidMint(publicPrice, amount) {
+    function mint(
+        uint256 amount
+    ) public payable isValidMint(publicPrice, amount) {
         if (minted[msg.sender]) revert InvalidMint();
         minted[msg.sender] = true;
         unchecked {
@@ -83,14 +85,15 @@ contract NFTMintDN404 is DN404, Ownable {
         _mint(msg.sender, amount * _WAD);
     }
 
-    function allowlistMint(uint256 amount, bytes32[] calldata proof)
-        public
-        payable
-        isValidMint(allowlistPrice, amount)
-    {
+    function allowlistMint(
+        uint256 amount,
+        bytes32[] calldata proof
+    ) public payable isValidMint(allowlistPrice, amount) {
         if (
             !MerkleProofLib.verifyCalldata(
-                proof, allowlistRoot, keccak256(abi.encodePacked(msg.sender))
+                proof,
+                allowlistRoot,
+                keccak256(abi.encodePacked(msg.sender))
             )
         ) {
             revert InvalidProof();
@@ -107,7 +110,10 @@ contract NFTMintDN404 is DN404, Ownable {
         _baseURI = baseURI_;
     }
 
-    function setPrices(uint120 publicPrice_, uint120 allowlistPrice_) public onlyOwner {
+    function setPrices(
+        uint120 publicPrice_,
+        uint120 allowlistPrice_
+    ) public onlyOwner {
         publicPrice = publicPrice_;
         allowlistPrice = allowlistPrice_;
     }
@@ -132,9 +138,13 @@ contract NFTMintDN404 is DN404, Ownable {
         return _symbol;
     }
 
-    function tokenURI(uint256 tokenId) public view override returns (string memory result) {
+    function tokenURI(
+        uint256 tokenId
+    ) public view override returns (string memory result) {
         if (bytes(_baseURI).length != 0) {
-            result = string(abi.encodePacked(_baseURI, LibString.toString(tokenId)));
+            result = string(
+                abi.encodePacked(_baseURI, LibString.toString(tokenId))
+            );
         }
     }
 }

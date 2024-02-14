@@ -9,5 +9,18 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vectorized/dn404.git"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-waffle": "^2.0.6",
+    "dn404": "^0.0.1",
+    "forge-std": "^1.1.2",
+    "solady": "^0.0.168"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.3",
+    "hardhat": "^2.19.5"
+  },
+  "scripts": {
+    "compile": "hardhat compile --show-stack-traces"
   }
 }
